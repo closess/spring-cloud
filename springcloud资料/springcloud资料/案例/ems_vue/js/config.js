@@ -1,1 +1,0 @@
-var baseURI = "http://localhost:8992/";
