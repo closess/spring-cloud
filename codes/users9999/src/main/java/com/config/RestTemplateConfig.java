@@ -7,6 +7,7 @@ import org.springframework.web.client.RestTemplate;
 
 @Configuration
 public class RestTemplateConfig {
+    //在工厂中创建一个restTemplate对象
     @Bean
     @LoadBalanced//代表ribbon负载均衡的RestTemplate客户端对象
     public RestTemplate getRestTemplate(){
