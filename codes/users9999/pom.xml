@@ -20,6 +20,11 @@
     </properties>
 
     <dependencies>
+        <!--Open Feign依赖-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
         <!--引入consul依赖-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
