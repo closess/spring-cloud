@@ -16,11 +16,14 @@ public interface ProductsClient {
      Map<String, Object> showMsg();
 
     @GetMapping("/product/findOne")
-     Map<String,Object> findOne(@RequestParam("id2") String productId);
+     Map<String,Object> findOne(@RequestParam("id") String id2);
 
-    @PostMapping("/product/save")
+    @PostMapping("/product/save")//伪HTTP客户端请求方式和服务端一样，可以和 OpenFeign的controller的请求方式不一样
      Map<String,Object> save(@RequestParam("name") String name);
 
     @PostMapping("/product/saveProduct")
-    Map<String,Object> saveProduct(@RequestBody Product product);
+    Map<String,Object> saveProduct( Product product);
+
+    @PostMapping("/product/saveProduct2")
+    Map<String,Object> saveProduct2(@RequestParam("productName") String  productName);
 }

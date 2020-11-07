@@ -5,6 +5,7 @@ import com.feignclients.ProductsClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.Mapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,9 +25,9 @@ public class OpenfeignController {
         return msg;
     }
     @GetMapping("/user/findOne")
-    public Map<String,Object> findOne(String id){
+    public Map<String,Object> findOne(String productId){
         log.info("用来这是GET方式的参数传递");
-        Map<String,Object> msg= productsClient.findOne(id);
+        Map<String,Object> msg= productsClient.findOne(productId);
         log.info("调用返回的信息是：[{}]",msg);
         return msg;
     }
@@ -42,6 +43,13 @@ public class OpenfeignController {
         log.info("接收到的商品信息:[{}]",product);
         Map<String, Object> map = productsClient.saveProduct(product);
         log.info("调用成功返回结果: "+map);
+        return map;
+    }
+    @GetMapping("/user/saveProduct2")
+    public Map<String,Object>saveProduct2(String productName){
+        log.info("接收到商品的名称为：[{}]", productName);
+        Map<String, Object> map = productsClient.saveProduct2(productName);
+        log.info("调用成功后的响应结果：[{}]", map);
         return map;
     }
 
