@@ -20,6 +20,11 @@
     </properties>
 
     <dependencies>
+        <!--引入hystrix-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+        </dependency>
         <!--引入consul依赖-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>

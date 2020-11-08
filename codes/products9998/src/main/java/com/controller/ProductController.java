@@ -1,6 +1,7 @@
 package com.controller;
 
 import com.entity.Product;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
@@ -72,5 +73,22 @@ public class ProductController {
         map.put("当前商品的名称:", productName);
         map.put("status", true);
         return map;
+    }
+    @GetMapping("/product/break")
+//    @HystrixCommand(fallbackMethod = "testBreakFall")
+    @HystrixCommand(defaultFallback = "testBreakFall2")
+    public String testBreak(int id){
+        log.info("接受到的商品的id为:"+id);
+        if (id<0){
+            throw  new RuntimeException("数据不合法!!!");
+        }
+        return "当前接收的商品id:"+id;
+    }
+    public String testBreakFall(int id){
+        return "当前数据"+id+"不合法>>>熔断器已经打开！";
+    }
+    //默认的fallback不能有参数，否则500异常-》FallbackDefinitionException: fallback method wasn't found:
+    public String testBreakFall2(){
+        return "当前数据不合法>>>熔断器已经打开！";
     }
 }
