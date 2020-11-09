@@ -1,7 +1,9 @@
 package com.feignclients;
 
 import com.entity.Product;
+import com.fallback.ProductClientFallback;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -9,8 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Map;
 
+@Component
 //value属性用来指定:调用服务名称
-@FeignClient("PRODUCTS")
+@FeignClient(value = "PRODUCTS",fallback = ProductClientFallback.class)
 public interface ProductsClient {
     @GetMapping("/product/findAll") //书写服务调用路径
      Map<String, Object> showMsg();
@@ -26,4 +29,7 @@ public interface ProductsClient {
 
     @PostMapping("/product/saveProduct2")
     Map<String,Object> saveProduct2(@RequestParam("productName") String  productName);
+
+    @GetMapping("/product/break")
+    public Map<String,Object> testBreak(@RequestParam("id") int id);
 }

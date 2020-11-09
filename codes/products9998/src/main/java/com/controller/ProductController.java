@@ -76,19 +76,25 @@ public class ProductController {
     }
     @GetMapping("/product/break")
 //    @HystrixCommand(fallbackMethod = "testBreakFall")
-    @HystrixCommand(defaultFallback = "testBreakFall2")
-    public String testBreak(int id){
+   @HystrixCommand(defaultFallback = "testBreakFall2")
+    public Map<String,Object> testBreak(@RequestParam("id")int id){
         log.info("接受到的商品的id为:"+id);
         if (id<0){
             throw  new RuntimeException("数据不合法!!!");
         }
-        return "当前接收的商品id:"+id;
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("msg","商品服务查询商品信息调用成功,当前服务端口: "+port);
+        map.put("当前商品的名称:", id);
+        map.put("status", true);
+        return map;
     }
     public String testBreakFall(int id){
         return "当前数据"+id+"不合法>>>熔断器已经打开！";
     }
     //默认的fallback不能有参数，否则500异常-》FallbackDefinitionException: fallback method wasn't found:
-    public String testBreakFall2(){
-        return "当前数据不合法>>>熔断器已经打开！";
+    public Map<String,Object> testBreakFall2(){
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("ERROR","当前服务已经被降级,无法使用");
+        return map;
     }
 }

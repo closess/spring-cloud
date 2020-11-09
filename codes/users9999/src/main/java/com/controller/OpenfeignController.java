@@ -4,10 +4,8 @@ import com.entity.Product;
 import com.feignclients.ProductsClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.Mapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -50,6 +48,13 @@ public class OpenfeignController {
         log.info("接收到商品的名称为：[{}]", productName);
         Map<String, Object> map = productsClient.saveProduct2(productName);
         log.info("调用成功后的响应结果：[{}]", map);
+        return map;
+    }
+    @GetMapping("/user/break")
+    public Map<String, Object> testBreak(@RequestParam("id") int id){
+        log.info("接收到的前端传过来的参数：[{}]", id);
+        Map<String,Object>  map= productsClient.testBreak(id);
+        log.info("响应结果:[{}]", map);
         return map;
     }
 
