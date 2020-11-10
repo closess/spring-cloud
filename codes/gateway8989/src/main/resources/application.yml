@@ -12,13 +12,19 @@ spring:
     gateway:
       routes:
         - id: users_route
-          uri: http://localhost:9999/
+#          uri: http://localhost:9999/
+          # lb\u4EE3\u8868\u8F6C\u53D1\u540E\u53F0\u670D\u52A1\u4F7F\u7528\u8D1F\u8F7D\u5747\u8861,users\u4EE3\u8868\u670D\u52A1\u6CE8\u518C\u4E2D\u5FC3\u4E0A\u7684\u670D\u52A1\u540D
+          uri: lb://users
           predicates:
             - Path=/user/**
         - id: product_route
-          uri: http://localhost:9998/
+#          uri: http://localhost:9998/
+          uri: lb://products
           predicates:
             - Path=/product/**
+      discovery:
+        locator:
+          enabled: true
 management:
   endpoints:
     web:
