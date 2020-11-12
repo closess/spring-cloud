@@ -1,0 +1,3 @@
+[submodule "codes/configserver7878/src/main/resources/springcloud-config"]
+	path = codes/configserver7878/src/main/resources/springcloud-config
+	url = https://gitee.com/closes/springcloud-config.git
