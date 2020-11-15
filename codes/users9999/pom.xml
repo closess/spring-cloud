@@ -20,6 +20,12 @@
     </properties>
 
     <dependencies>
+        <!--config客户端的依赖-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-config</artifactId>
+        </dependency>
+
         <!--引入hystrix-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>

@@ -20,6 +20,11 @@
 	</properties>
 
 	<dependencies>
+		<!--引入bus依赖-->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-bus-amqp</artifactId>
+		</dependency>
 		<!--引入config server依赖-->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
